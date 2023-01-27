@@ -1,0 +1,9 @@
+{
+
+    "bumTestKeptINMemory":0,
+    "video":true,
+    "reporter":"mocha-junit-reporter",
+    "toConsole":true,
+    "defaultCommandTimeout":60000,
+    "pageLoadTimeout":2000000
+}

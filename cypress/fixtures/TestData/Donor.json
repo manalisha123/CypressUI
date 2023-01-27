@@ -1,0 +1,23 @@
+{
+   "amount":"10.00",
+   "donationType":"Yes, this donation is my own money",
+   "motivation": "In memory of someone",
+   "cancerType": "Bowel cancer",      
+   "firstname":"Tester",
+   "lastname":"O'Doh-erty",
+   "email":"auto-pws@cancer.org.uk",
+   "phone":"07999999999",
+   "homeAddress":{
+      "address1":"37 The Rowans",
+      "address2":"",
+      "address3":"",
+      "town":"Woking",
+      "postcode":"GU22 7SS",
+      "country":"United Kingdom"
+   },
+   "emailOptIn":"no",
+   "cardNumber":"4000000000001000",
+   "cvv":"123",
+   "cardExpiry":"1225",
+   "giftaid":"yes"
+}
