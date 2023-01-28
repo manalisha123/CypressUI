@@ -1,0 +1,23 @@
+{
+   "AcceptCookiesWindowPopUp":"#onetrust-button-group",
+   "AcceptCookiesButton":"#onetrust-accept-btn-handler",
+   "DonationBanner":".IntroBanner__IntroBannerContainer-sc-q8n3f9-1",
+   "DonationMessageHeader":".IntroBanner__IntroBannerContainer-sc-q8n3f9-1 > :nth-child(2)",
+   "Dollar10":"[data-cy=\"amount-sel-10\"]",
+   "Dollar20":"[data-cy=\"amount-sel-20\"]",
+   "Dollar30":"[data-cy=\"amount-sel-30\"]",
+   "OtherAnyAmount":"#otherAmount",
+   "DonationType":":nth-child(2) > .FormFields__FormFieldsStyled-sc-1bav6xx-0 > fieldset > legend > .sc-breuTD",
+   "DonationTypeRequiredPersonal":"#typeRadioGroupLabel",
+   "DonationGiftAidText":"legend > :nth-child(3)",
+   "SelectRadioButtonasPersonalMoney":"#typeRadioGroup > .idzxmf > .sc-kgflAQ > .sc-bBrHrO",
+   "YourMotivation":":nth-child(3) > .FormFields__FormFieldsStyled-sc-1bav6xx-0 > fieldset > legend > .sc-breuTD",
+   "DonationConfirmationQuestion":".styles__InputsLayoutWrapper-sc-1hrmoav-3 > .sc-gKXOVf > .sc-iBkjds",
+   "DonationReason":".sc-iwajpm",
+   "DonationQuestionReason":"#motivationCollapse-header > :nth-child(1)",
+   "DonationQuestionReasonAnswer":".hfkLhY > .styles__InputsLayoutWrapper-sc-1hrmoav-3 > .sc-gKXOVf > .sc-iBkjds",
+   "NameOfThePerson":"#inMemoryName",
+   "TextForDedication":".bUGsCV",
+   "CreditCardSelection":".PaymentToggle__CardPayment-sc-1lx54at-2 > .FormGroup__FormGroupStyled-sc-tf6z59-0 > .FormFields__FormFieldsStyled-sc-1bav6xx-0 > fieldset > legend > .sc-dIsUp"
+  
+}

@@ -1,0 +1,9 @@
+{
+    "NameOfThePerson":"#inMemoryName",
+    "YourDetails":":nth-child(1) > legend > .sc-dIsUp",
+    "ProgressBarDetail":".ProgressBar__MaxWidthContainer-sc-1qj8iat-0",
+    "YourDetailForm":".form > :nth-child(1)",
+    "ContinueButton":".kffsok > .sc-gtsrHT",
+    "AcceptCookiesWindowPopUpDetail":"#onetrust-button-group",
+    "AcceptCookiesButtonDetail":"#onetrust-accept-btn-handler"
+}
