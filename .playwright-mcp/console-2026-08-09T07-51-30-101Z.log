@@ -1,0 +1,4 @@
+[     371ms] [WARNING] Datadog Browser SDK: service value doesn't meet tag requirements and will be sanitized @ https://app.pws.int.cruk.org/_next/static/chunks/406-f56544bc77169012.js:0
+[    1457ms] [WARNING] [Meta Pixel] - Invalid PixelID: null. @ https://connect.facebook.net/en_US/fbevents.js:193
+[    1459ms] [WARNING] [Meta Pixel] - Trying to set argument tmSimo-GTM-WebTemplate for uninitialized Pixel ID . @ https://connect.facebook.net/en_US/fbevents.js:193
+[    1460ms] [WARNING] [Meta Pixel] - Pixel  not found @ https://connect.facebook.net/en_US/fbevents.js:193

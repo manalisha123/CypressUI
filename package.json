@@ -1,0 +1,13 @@
+{
+  "name": "donation-page-cypress-research",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --headed",
+    "cypress:run:spec": "cypress run --headed --spec cypress/e2e/DonationDetails/CancerResearchDonation.cy.js"
+  },
+  "devDependencies": {
+    "cypress": "^15.20.0"
+  }
+}
