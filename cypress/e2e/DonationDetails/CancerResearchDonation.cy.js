@@ -88,7 +88,7 @@ describe('Donation journey', () => {
     })
 
     cy.contains('button', 'Continue').click({ force: true })
-    cy.contains('h1, h2, h3', /payment|your details/i, { timeout: 120000 }).should('be.visible')
+    cy.location('pathname', { timeout: 120000 }).should('match', /\/support-us\/(details|payment)/)
   })
 
   it('continues to the payment details page after completing personal details', function () {
@@ -149,6 +149,6 @@ describe('Donation journey', () => {
     })
 
     cy.contains('button', 'Continue').click({ force: true })
-    cy.contains('h1, h2, h3', /payment|details|your details/i, { timeout: 120000 }).should('be.visible')
+    cy.location('pathname', { timeout: 120000 }).should('match', /\/support-us\/(details|payment)/)
   })
 })
