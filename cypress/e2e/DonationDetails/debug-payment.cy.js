@@ -21,15 +21,12 @@ describe('debug payment flow', () => {
       cy.get('#phoneNumber').clear().type(testData.phone)
 
       cy.get('body').then(($body) => {
-        const postcodeInput = $body.find('#postcode, input[name="postcode"]')
+        const postcodeInput = $body.find('#postcode, input[name="postalCode"]')
         if (postcodeInput.length) {
           cy.wrap(postcodeInput.first()).clear().type(testData.homeAddress.postcode)
-          cy.contains(/find address/i).click({ force: true })
-          cy.get('body').then(($bodyAfterLookup) => {
-            const addressSelect = $bodyAfterLookup.find('select')
-            if (addressSelect.length) {
-              cy.wrap(addressSelect.first()).select('243 Southwark Park Road', { force: true })
-            }
+          cy.contains('Find address').click({ force: true })
+          cy.get('#addressSelection').should('be.visible').find('option[value]:not([value=""])').first().then(($option) => {
+            cy.get('#addressSelection').select($option.val(), { force: true })
           })
         }
       })
@@ -55,7 +52,7 @@ describe('debug payment flow', () => {
         }
       })
 
-      cy.contains('button', 'Continue').click({ force: true })
+      cy.get('button[type="submit"]').click({ force: true })
       cy.location('pathname').then((pathname) => {
         cy.log('pathname=' + pathname)
       })
