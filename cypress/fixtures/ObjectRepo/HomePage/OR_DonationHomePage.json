@@ -1,6 +1,4 @@
 {
-   "AcceptCookiesWindowPopUp":"#onetrust-button-group",
-   "AcceptCookiesButton":"#onetrust-accept-btn-handler",
    "DonationBanner":".sc-jdAMXn",
    "DonationMessageHeader":".IntroBanner__IntroBannerContainer-sc-q8n3f9-1 > :nth-child(2)",
    "Dollar10":"[data-cy=\"amount-sel-10\"]",
@@ -16,8 +14,9 @@
    "DonationReason":".sc-iwajpm",
    "DonationQuestionReason":"#motivationCollapse-header > :nth-child(1)",
    "DonationQuestionReasonAnswer":"#motivationCollapse-content > .sc-fFSPTT > .sc-hKFxyN",
-   "NameOfThePerson":"#inMemoryName",
-   "YourDetails":":nth-child(1) > legend > .sc-dIsUp",
-   "ProgressBarDetail":".ProgressBar__MaxWidthContainer-sc-1qj8iat-0",
-   "YourDetailForm":".form > :nth-child(1)"
+   "DonationAmountHeading":"h2",
+   "DonationAmountLabel":"label",
+   "DonationReasonSelect":"select",
+   "OwnMoneyLabel":"label",
+   "ContinueButton":"button"
 }

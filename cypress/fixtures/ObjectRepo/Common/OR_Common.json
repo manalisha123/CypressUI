@@ -1,0 +1,6 @@
+{
+  "AcceptCookiesWindowPopUp": "#onetrust-button-group",
+  "AcceptCookiesButton": "#onetrust-accept-btn-handler",
+  "CookieContinueButton": "button",
+  "PageBody": "body"
+}

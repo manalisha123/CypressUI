@@ -26,6 +26,8 @@
 Cypress.Commands.add("ObjectRepo",function()
 { //qualcomm object repo
     cy.fixture('ObjectRepo/HomePage/OR_DonationHomePage.json').as("ORDonationHomePage")
+    cy.fixture('ObjectRepo/DonationDetails/OR_DonationDetailsPage.json').as("ORDonationDetailsPage")
+    cy.fixture('ObjectRepo/Common/OR_Common.json').as("ORCommon")
 })
 Cypress.Commands.add("TestData",function()
 { //qualcomm object repo
