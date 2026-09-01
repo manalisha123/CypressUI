@@ -37,3 +37,15 @@ Cypress.Commands.add("DonorDetails",function()
 { //qualcomm object repo
     cy.fixture('TestData/Donor.json').as("DonorDetails")
 })
+Cypress.Commands.add("DonationDetailsPageRepo",function()
+{ //Donation Details Page object repo
+    cy.fixture('ObjectRepo/DonationDetails/OR_DonationDetailsPage.json').as("ORDonationDetailsPage")
+})
+Cypress.Commands.add("PaymentPageRepo",function()
+{ //Payment Page object repo
+    cy.fixture('ObjectRepo/Payment/OR_PaymentPage.json').as("ORPaymentPage")
+})
+Cypress.Commands.add("CommonElementsRepo",function()
+{ //Common elements object repo
+    cy.fixture('ObjectRepo/Common/OR_Common.json').as("ORCommonElements")
+})

@@ -1,5 +1,5 @@
-const fillAddressIfPresent = (testData, commonSelectors, detailsSelectors) => {
-  cy.get(commonSelectors.PageBody).then(($body) => {
+const fillAddressIfPresent = (testData, detailsSelectors) => {
+  cy.get('body').then(($body) => {
     const manualAddressLink = $body.find(detailsSelectors.ManualAddressButton).filter((index, element) => /enter address manually/i.test(element.textContent || ''))
     if (manualAddressLink.length) {
       cy.wrap(manualAddressLink.first()).click({ force: true })
@@ -44,9 +44,12 @@ describe('Donation journey', () => {
   beforeEach(function () {
     cy.ObjectRepo()
     cy.TestData()
+    cy.DonationDetailsPageRepo()
+    cy.PaymentPageRepo()
+    cy.CommonElementsRepo()
     cy.visit('/support-us/your-donation')
 
-    cy.get('@ORCommon').then((commonSelectors) => {
+    cy.get('@ORCommonElements').then((commonSelectors) => {
       cy.get(commonSelectors.PageBody).then(($body) => {
         if ($body.find(commonSelectors.AcceptCookiesButton).length > 0) {
           cy.get(commonSelectors.AcceptCookiesButton).click({ force: true })
@@ -82,7 +85,7 @@ describe('Donation journey', () => {
 
     cy.contains(this.ORDonationDetailsPage.AddressHeading, /your address/i).should('be.visible')
 
-    fillAddressIfPresent(this.TestData, this.ORCommon, this.ORDonationDetailsPage)
+    fillAddressIfPresent(this.TestData, this.ORDonationDetailsPage)
 
     cy.contains(this.ORDonationDetailsPage.ContinueButton, 'Continue').click({ force: true })
     cy.location('pathname', { timeout: 120000 }).should('match', /\/support-us\/details/)
@@ -103,7 +106,7 @@ describe('Donation journey', () => {
     cy.get(this.ORDonationDetailsPage.EmailInput).clear().type(this.TestData.email)
     cy.get(this.ORDonationDetailsPage.PhoneInput).clear().type(this.TestData.phone)
 
-    fillAddressIfPresent(this.TestData, this.ORCommon, this.ORDonationDetailsPage)
+    fillAddressIfPresent(this.TestData, this.ORDonationDetailsPage)
 
     cy.contains(this.ORDonationDetailsPage.ContinueButton, 'Continue').click({ force: true })
     cy.location('pathname', { timeout: 120000 }).should('match', /\/support-us\/details/)

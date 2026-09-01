@@ -1,0 +1,9 @@
+{
+  "PaymentPageHeading": "h1, h2, h3",
+  "CardNumberInput": "input[name='cardNumber'], input[placeholder*='Card']",
+  "ExpiryInput": "input[name='expiry'], input[placeholder*='Expiry']",
+  "CVVInput": "input[name='cvv'], input[placeholder*='CVC']",
+  "PayButton": "button[type='submit'], button:contains('Pay')",
+  "ConfirmButton": "button:contains('Confirm')",
+  "CardDetailsSection": "fieldset"
+}
