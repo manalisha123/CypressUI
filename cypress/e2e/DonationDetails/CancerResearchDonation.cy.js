@@ -48,18 +48,7 @@ describe('Donation journey', () => {
     cy.PaymentPageRepo()
     cy.CommonElementsRepo()
     cy.visit('/support-us/your-donation')
-
-    cy.get('@ORCommonElements').then((commonSelectors) => {
-      cy.get(commonSelectors.PageBody).then(($body) => {
-        if ($body.find(commonSelectors.AcceptCookiesButton).length > 0) {
-          cy.get(commonSelectors.AcceptCookiesButton).click({ force: true })
-        }
-        const cookieContinueButton = $body.find(commonSelectors.CookieContinueButton).filter((index, element) => /OK, continue to site/i.test(element.textContent || ''))
-        if (cookieContinueButton.length > 0) {
-          cy.contains(commonSelectors.CookieContinueButton, /OK, continue to site/i).click({ force: true })
-        }
-      })
-    })
+    cy.dismissCookieOverlay()
   })
 
   it('launches the donation page with the expected content', function () {
@@ -101,10 +90,10 @@ describe('Donation journey', () => {
     cy.contains(this.ORDonationDetailsPage.YourDetailsHeading, 'Your details').should('be.visible')
 
     cy.get(this.ORDonationDetailsPage.TitleSelect).first().select(this.TestData.Title, { force: true })
-    cy.get(this.ORDonationDetailsPage.ForenameInput).clear().type(this.TestData.firstname)
-    cy.get(this.ORDonationDetailsPage.SurnameInput).clear().type(this.TestData.lastname)
-    cy.get(this.ORDonationDetailsPage.EmailInput).clear().type(this.TestData.email)
-    cy.get(this.ORDonationDetailsPage.PhoneInput).clear().type(this.TestData.phone)
+    cy.get(this.ORDonationDetailsPage.ForenameInput).clear({ force: true }).type(this.TestData.firstname, { force: true })
+    cy.get(this.ORDonationDetailsPage.SurnameInput).clear({ force: true }).type(this.TestData.lastname, { force: true })
+    cy.get(this.ORDonationDetailsPage.EmailInput).clear({ force: true }).type(this.TestData.email, { force: true })
+    cy.get(this.ORDonationDetailsPage.PhoneInput).clear({ force: true }).type(this.TestData.phone, { force: true })
 
     fillAddressIfPresent(this.TestData, this.ORDonationDetailsPage)
 

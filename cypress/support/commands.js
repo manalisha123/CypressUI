@@ -49,3 +49,23 @@ Cypress.Commands.add("CommonElementsRepo",function()
 { //Common elements object repo
     cy.fixture('ObjectRepo/Common/OR_Common.json').as("ORCommonElements")
 })
+
+Cypress.Commands.add("dismissCookieOverlay",function()
+{ //dismiss cookie overlay - attempt to click accept/continue buttons with force
+    // Try to click accept cookies button
+    cy.get('body').then(($body) => {
+        if ($body.find('#onetrust-accept-btn-handler').length > 0) {
+            cy.get('#onetrust-accept-btn-handler', { timeout: 3000 }).click({ force: true })
+            cy.wait(300)
+        }
+    })
+    
+    // Try to click OK continue button if present
+    cy.get('body').then(($body) => {
+        const continueBtn = $body.find('button').filter((index, el) => /OK, continue to site/i.test(el.textContent || ''))
+        if (continueBtn.length > 0) {
+            cy.wrap(continueBtn.first()).click({ force: true })
+            cy.wait(300)
+        }
+    })
+})
