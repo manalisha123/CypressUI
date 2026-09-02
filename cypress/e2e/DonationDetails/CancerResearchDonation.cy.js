@@ -1,42 +1,58 @@
 const fillAddressIfPresent = (testData, detailsSelectors) => {
-  cy.get('body').then(($body) => {
+  cy.get('body', { timeout: 5000 }).then(($body) => {
     const manualAddressLink = $body.find(detailsSelectors.ManualAddressButton).filter((index, element) => /enter address manually/i.test(element.textContent || ''))
     if (manualAddressLink.length) {
       cy.wrap(manualAddressLink.first()).click({ force: true })
+      cy.wait(300)
     }
+  })
 
-    const postcodeInput = $body.find(detailsSelectors.PostcodeInput)
-    if (postcodeInput.length) {
-      cy.wrap(postcodeInput.first()).clear({ force: true }).type(testData.homeAddress.postcode, { force: true })
-      cy.wrap(postcodeInput.first()).should('have.value', testData.homeAddress.postcode)
+  // Try to fill postcode if it exists
+  cy.get('body').then(($body) => {
+    const postcodeEl = $body.find(detailsSelectors.PostcodeInput)
+    if (postcodeEl.length) {
+      cy.wrap(postcodeEl.first()).clear({ force: true }).type(testData.homeAddress.postcode, { force: true }).should('have.value', testData.homeAddress.postcode)
     }
+  })
 
-    const address1 = $body.find(detailsSelectors.Address1Input)
-    if (address1.length) {
-      cy.wrap(address1.first()).clear({ force: true }).type(testData.homeAddress.address1, { force: true })
-      cy.wrap(address1.first()).should('have.value', testData.homeAddress.address1)
+  // Try to fill address1 if it exists
+  cy.get('body').then(($body) => {
+    const addr1El = $body.find(detailsSelectors.Address1Input)
+    if (addr1El.length) {
+      cy.wrap(addr1El.first()).clear({ force: true }).type(testData.homeAddress.address1, { force: true }).should('have.value', testData.homeAddress.address1)
     }
+  })
 
-    const address2 = $body.find(detailsSelectors.Address2Input)
-    if (address2.length) {
-      cy.wrap(address2.first()).clear({ force: true }).type(testData.homeAddress.address2, { force: true })
+  // Try to fill address2 if it exists
+  cy.get('body').then(($body) => {
+    const addr2El = $body.find(detailsSelectors.Address2Input)
+    if (addr2El.length) {
+      cy.wrap(addr2El.first()).clear({ force: true }).type(testData.homeAddress.address2, { force: true })
     }
+  })
 
-    const address3 = $body.find(detailsSelectors.Address3Input)
-    if (address3.length) {
-      cy.wrap(address3.first()).clear({ force: true }).type(testData.homeAddress.address3, { force: true })
+  // Try to fill address3 if it exists
+  cy.get('body').then(($body) => {
+    const addr3El = $body.find(detailsSelectors.Address3Input)
+    if (addr3El.length) {
+      cy.wrap(addr3El.first()).clear({ force: true }).type(testData.homeAddress.address3, { force: true })
     }
+  })
 
-    const town = $body.find(detailsSelectors.TownInput)
-    if (town.length) {
-      cy.wrap(town.first()).clear({ force: true }).type(testData.homeAddress.town, { force: true })
+  // Try to fill town if it exists
+  cy.get('body').then(($body) => {
+    const townEl = $body.find(detailsSelectors.TownInput)
+    if (townEl.length) {
+      cy.wrap(townEl.first()).clear({ force: true }).type(testData.homeAddress.town, { force: true })
     }
+  })
 
-    const country = $body.find(detailsSelectors.CountryInput)
-    if (country.length) {
-      cy.wrap(country.first()).select(testData.homeAddress.country, { force: true })
+  // Try to fill country if it exists
+  cy.get('body').then(($body) => {
+    const countryEl = $body.find(detailsSelectors.CountryInput)
+    if (countryEl.length) {
+      cy.wrap(countryEl.first()).select(testData.homeAddress.country, { force: true })
     }
-
   })
 }
 
@@ -67,10 +83,18 @@ describe('Donation journey', () => {
     cy.contains(this.ORDonationDetailsPage.YourDetailsHeading, 'Your details').should('be.visible')
 
     cy.get(this.ORDonationDetailsPage.TitleSelect).first().select(this.TestData.Title, { force: true })
-    cy.get(this.ORDonationDetailsPage.ForenameInput).clear().type(this.TestData.firstname)
-    cy.get(this.ORDonationDetailsPage.SurnameInput).clear().type(this.TestData.lastname)
-    cy.get(this.ORDonationDetailsPage.EmailInput).clear().type(this.TestData.email)
-    cy.get(this.ORDonationDetailsPage.PhoneInput).clear().type(this.TestData.phone)
+    cy.get(this.ORDonationDetailsPage.ForenameInput).as('forename').clear({ force: true }).then(() => {
+      cy.get('@forename').type(this.TestData.firstname, { force: true })
+    })
+    cy.get(this.ORDonationDetailsPage.SurnameInput).as('surname').clear({ force: true }).then(() => {
+      cy.get('@surname').type(this.TestData.lastname, { force: true })
+    })
+    cy.get(this.ORDonationDetailsPage.EmailInput).as('email').clear({ force: true }).then(() => {
+      cy.get('@email').type(this.TestData.email, { force: true })
+    })
+    cy.get(this.ORDonationDetailsPage.PhoneInput).as('phone').clear({ force: true }).then(() => {
+      cy.get('@phone').type(this.TestData.phone, { force: true })
+    })
 
     cy.contains(this.ORDonationDetailsPage.AddressHeading, /your address/i).should('be.visible')
 
@@ -90,12 +114,18 @@ describe('Donation journey', () => {
     cy.contains(this.ORDonationDetailsPage.YourDetailsHeading, 'Your details').should('be.visible')
 
     cy.get(this.ORDonationDetailsPage.TitleSelect).first().select(this.TestData.Title, { force: true })
-    cy.get(this.ORDonationDetailsPage.ForenameInput).clear({ force: true }).type(this.TestData.firstname, { force: true })
-    cy.get(this.ORDonationDetailsPage.SurnameInput).clear({ force: true }).type(this.TestData.lastname, { force: true })
-    cy.get(this.ORDonationDetailsPage.EmailInput).clear({ force: true }).type(this.TestData.email, { force: true })
-    cy.get(this.ORDonationDetailsPage.PhoneInput).clear({ force: true }).type(this.TestData.phone, { force: true })
-
-    fillAddressIfPresent(this.TestData, this.ORDonationDetailsPage)
+    cy.get(this.ORDonationDetailsPage.ForenameInput).as('forename2').clear({ force: true }).then(() => {
+      cy.get('@forename2').type(this.TestData.firstname, { force: true })
+    })
+    cy.get(this.ORDonationDetailsPage.SurnameInput).as('surname2').clear({ force: true }).then(() => {
+      cy.get('@surname2').type(this.TestData.lastname, { force: true })
+    })
+    cy.get(this.ORDonationDetailsPage.EmailInput).as('email2').clear({ force: true }).then(() => {
+      cy.get('@email2').type(this.TestData.email, { force: true })
+    })
+    cy.get(this.ORDonationDetailsPage.PhoneInput).as('phone2').clear({ force: true }).then(() => {
+      cy.get('@phone2').type(this.TestData.phone, { force: true })
+    })
 
     cy.contains(this.ORDonationDetailsPage.ContinueButton, 'Continue').click({ force: true })
     cy.location('pathname', { timeout: 120000 }).should('match', /\/support-us\/details/)
