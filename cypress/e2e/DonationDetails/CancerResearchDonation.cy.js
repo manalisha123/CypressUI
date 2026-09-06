@@ -56,13 +56,39 @@ const fillAddressIfPresent = (testData, detailsSelectors) => {
   })
 }
 
+const startDonationJourney = (testData, homePage) => {
+  cy.get(homePage.Dollar10).check({ force: true })
+  cy.contains(homePage.OwnMoneyLabel, 'I am donating my own money').click({ force: true })
+  cy.get(homePage.DonationReasonSelect).select(testData.DonationReason1, { force: true })
+  cy.contains(homePage.ContinueButton, 'Continue').click({ force: true })
+}
+
+const completeDonationDetails = (testData, detailsPage) => {
+  cy.contains(detailsPage.YourDetailsHeading, 'Your details').should('be.visible')
+
+  cy.get(detailsPage.TitleSelect).first().select(testData.Title, { force: true })
+  cy.get(detailsPage.ForenameInput).as('forename').clear({ force: true }).then(() => {
+    cy.get('@forename').type(testData.firstname, { force: true })
+  })
+  cy.get(detailsPage.SurnameInput).as('surname').clear({ force: true }).then(() => {
+    cy.get('@surname').type(testData.lastname, { force: true })
+  })
+  cy.get(detailsPage.EmailInput).as('email').clear({ force: true }).then(() => {
+    cy.get('@email').type(testData.email, { force: true })
+  })
+  cy.get(detailsPage.PhoneInput).as('phone').clear({ force: true }).then(() => {
+    cy.get('@phone').type(testData.phone, { force: true })
+  })
+
+  cy.contains(detailsPage.AddressHeading, /your address/i).should('be.visible')
+  fillAddressIfPresent(testData, detailsPage)
+
+  cy.contains(detailsPage.ContinueButton, 'Continue').click({ force: true })
+}
+
 describe('Donation journey', () => {
   beforeEach(function () {
-    cy.ObjectRepo()
-    cy.TestData()
-    cy.DonationDetailsPageRepo()
-    cy.PaymentPageRepo()
-    cy.CommonElementsRepo()
+    cy.loadDonationFixtures()
     cy.visit('/support-us/your-donation')
     cy.dismissCookieOverlay()
   })
@@ -75,59 +101,17 @@ describe('Donation journey', () => {
   })
 
   it('selects a donation amount and continues to the next step', function () {
-    cy.get(this.ORDonationHomePage.Dollar10).check({ force: true })
-    cy.contains(this.ORDonationHomePage.OwnMoneyLabel, 'I am donating my own money').click({ force: true })
-    cy.get(this.ORDonationHomePage.DonationReasonSelect).select(this.TestData.DonationReason1, { force: true })
-    cy.contains(this.ORDonationHomePage.ContinueButton, 'Continue').click({ force: true })
+    startDonationJourney(this.TestData, this.ORDonationHomePage)
+    completeDonationDetails(this.TestData, this.ORDonationDetailsPage)
 
-    cy.contains(this.ORDonationDetailsPage.YourDetailsHeading, 'Your details').should('be.visible')
-
-    cy.get(this.ORDonationDetailsPage.TitleSelect).first().select(this.TestData.Title, { force: true })
-    cy.get(this.ORDonationDetailsPage.ForenameInput).as('forename').clear({ force: true }).then(() => {
-      cy.get('@forename').type(this.TestData.firstname, { force: true })
-    })
-    cy.get(this.ORDonationDetailsPage.SurnameInput).as('surname').clear({ force: true }).then(() => {
-      cy.get('@surname').type(this.TestData.lastname, { force: true })
-    })
-    cy.get(this.ORDonationDetailsPage.EmailInput).as('email').clear({ force: true }).then(() => {
-      cy.get('@email').type(this.TestData.email, { force: true })
-    })
-    cy.get(this.ORDonationDetailsPage.PhoneInput).as('phone').clear({ force: true }).then(() => {
-      cy.get('@phone').type(this.TestData.phone, { force: true })
-    })
-
-    cy.contains(this.ORDonationDetailsPage.AddressHeading, /your address/i).should('be.visible')
-
-    fillAddressIfPresent(this.TestData, this.ORDonationDetailsPage)
-
-    cy.contains(this.ORDonationDetailsPage.ContinueButton, 'Continue').click({ force: true })
     cy.location('pathname', { timeout: 120000 }).should('match', /\/support-us\/details/)
     cy.contains(this.ORDonationDetailsPage.DetailsPageHeading, /details|your details/i, { timeout: 120000 }).should('be.visible')
   })
 
   it('continues to the payment page where card details are expected after completing personal details', function () {
-    cy.get(this.ORDonationHomePage.Dollar10).check({ force: true })
-    cy.contains(this.ORDonationHomePage.OwnMoneyLabel, 'I am donating my own money').click({ force: true })
-    cy.get(this.ORDonationHomePage.DonationReasonSelect).select(this.TestData.DonationReason1, { force: true })
-    cy.contains(this.ORDonationHomePage.ContinueButton, 'Continue').click({ force: true })
+    startDonationJourney(this.TestData, this.ORDonationHomePage)
+    completeDonationDetails(this.TestData, this.ORDonationDetailsPage)
 
-    cy.contains(this.ORDonationDetailsPage.YourDetailsHeading, 'Your details').should('be.visible')
-
-    cy.get(this.ORDonationDetailsPage.TitleSelect).first().select(this.TestData.Title, { force: true })
-    cy.get(this.ORDonationDetailsPage.ForenameInput).as('forename2').clear({ force: true }).then(() => {
-      cy.get('@forename2').type(this.TestData.firstname, { force: true })
-    })
-    cy.get(this.ORDonationDetailsPage.SurnameInput).as('surname2').clear({ force: true }).then(() => {
-      cy.get('@surname2').type(this.TestData.lastname, { force: true })
-    })
-    cy.get(this.ORDonationDetailsPage.EmailInput).as('email2').clear({ force: true }).then(() => {
-      cy.get('@email2').type(this.TestData.email, { force: true })
-    })
-    cy.get(this.ORDonationDetailsPage.PhoneInput).as('phone2').clear({ force: true }).then(() => {
-      cy.get('@phone2').type(this.TestData.phone, { force: true })
-    })
-
-    cy.contains(this.ORDonationDetailsPage.ContinueButton, 'Continue').click({ force: true })
     cy.location('pathname', { timeout: 120000 }).should('match', /\/support-us\/details/)
     cy.contains(this.ORDonationDetailsPage.DetailsPageHeading, /details|your details/i, { timeout: 120000 }).should('be.visible')
   })

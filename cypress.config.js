@@ -1,19 +1,22 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  video: true,
-  screenshotOnRunFailure: true,
   reporter: 'spec',
-  defaultCommandTimeout: 60000,
+  video: false,
+  screenshotOnRunFailure: true,
+  defaultCommandTimeout: 20000,
+  requestTimeout: 15000,
+  responseTimeout: 30000,
+  pageLoadTimeout: 120000,
   chromeWebSecurity: false,
-  allowCypressEnv: false,
-  pageLoadTimeout: 2000000,
-  chromeWebSecurity: false,
-  allowCypressEnv: false,
+  retries: {
+    runMode: 2,
+    openMode: 0,
+  },
 
   e2e: {
     baseUrl: 'https://app.pws.int.cruk.org',
-    testIsolation: false,
+    testIsolation: true,
     specPattern: 'cypress/e2e/**/*.cy.js',
     supportFile: 'cypress/support/e2e.js',
     fixturesFolder: 'cypress/fixtures',

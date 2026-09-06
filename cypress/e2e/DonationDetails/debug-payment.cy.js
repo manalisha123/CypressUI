@@ -1,10 +1,6 @@
 describe('debug payment flow', () => {
   beforeEach(function () {
-    cy.ObjectRepo()
-    cy.TestData()
-    cy.DonationDetailsPageRepo()
-    cy.PaymentPageRepo()
-    cy.CommonElementsRepo()
+    cy.loadDonationFixtures()
     cy.visit('/support-us/your-donation')
     cy.dismissCookieOverlay()
   })

@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --headed",
-    "cypress:run:spec": "cypress run --headed --spec cypress/e2e/DonationDetails/CancerResearchDonation.cy.js"
+    "cypress:run": "cypress run --browser electron",
+    "cypress:run:headed": "cypress run --headed --browser electron",
+    "cypress:run:spec": "cypress run --browser electron --spec cypress/e2e/DonationDetails/CancerResearchDonation.cy.js"
   },
   "devDependencies": {
     "cypress": "^15.20.0"
